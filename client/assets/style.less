@@ -1,0 +1,35 @@
+html, body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+app {
+  display: flex;
+  flex: 1;
+
+  .container-fluid {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .board {
+      flex: 1;
+      order: 1;
+      background: yellow;
+
+      .sidebar {
+        background: red;
+      }
+    }
+
+    .taskbar {
+      order: 2;
+
+      nav {
+        flex: 1;
+        align-self: flex-end;
+      }
+    }
+  }
+}

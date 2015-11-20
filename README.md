@@ -2,7 +2,7 @@
 
 MMO RTS browser game
 
-tech:
+Tech:
 - TypeScript
 - MeteorJS
 - Angular 2

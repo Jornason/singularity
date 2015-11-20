@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/d3.d.ts" />
 import {Component, View, Inject, ElementRef, NgFor} from "angular2/angular2";
 import Config from "../../lib/config";
 import {Planets} from "../../lib/collection/planets";
@@ -44,13 +45,12 @@ export default class Starmap {
             margin = { top: 20, right: 20, bottom: 20, left: 40 },
             ratio = width / height,
             ticks = [],
-            svgWidth = width - margin.right,
-            svgHeight = height - margin.top - margin.bottom;
+            planets = [];
 
-        d3.select("#starmap svg").attr("width", svgWidth).attr("height", svgHeight);
+        d3.select("#starmap svg").attr("width", width).attr("height", height);
 
-        let ticks = this.getTicks(this.galaxy);
-        let planets = this.getPlanets();
+        ticks = this.getTicks(this.galaxy);
+        planets = this.getPlanets();
 
         this.x = d3.scale.linear()
             .domain([-width / 2, width / 2])
@@ -105,7 +105,7 @@ export default class Starmap {
             .attr("class", "stars")
             .call(this.zoom);
 
-        var circle = this.planetsG.selectAll("circle")
+        let circle = this.planetsG.selectAll("circle")
             .data(planets)
             .enter()
             .append("circle")
@@ -176,6 +176,7 @@ export default class Starmap {
 
         this.svg.select(".x.axis").call(this.xAxis);
         this.svg.select(".y.axis").call(this.yAxis);
+        //noinspection TypeScriptUnresolvedVariable
         this.planetsG.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 

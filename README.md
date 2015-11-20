@@ -1,6 +1,10 @@
 # singularity
 
-written in typescript
+MMO RTS browser game
 
-features:
-MeteorJS, MongoDB, Angular2
+tech:
+- TypeScript
+- MeteorJS
+- Angular 2
+- MongoDB
+

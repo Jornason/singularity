@@ -24,10 +24,13 @@ export default class Starmap {
     private planets;
     private galaxy;
 
+    private self: Starmap;
+
     constructor(
         @Inject(ElementRef) elementRef,
         @Inject(Config) options
     ) {
+        this.self = this;
         this.galaxy = options.galaxy;
         this.planets = Planets.find();
         this.elem = elementRef.nativeElement;
@@ -79,7 +82,7 @@ export default class Starmap {
             .scaleExtent([1, 5])
             .center([width / 2, height / 2])
             .size([width, height])
-            .on("zoom", this.onZoom);
+            .on("zoom", () => this.onZoom());
 
         this.svg = d3.select(".g-base")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -110,9 +113,6 @@ export default class Starmap {
             .attr("cy", function (c) { return c.cy })
             .attr("r", 2)
             .attr("fill", "red");
-
-        d3.selectAll("button[data-zoom]")
-            .on("click", this.onClick);
     }
 
     private getTicks(galaxy) {
@@ -176,21 +176,21 @@ export default class Starmap {
 
         this.svg.select(".x.axis").call(this.xAxis);
         this.svg.select(".y.axis").call(this.yAxis);
-        //this.planetsG.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        this.planetsG.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 
-    private onClick() {
+    private onClick(value) {
         this.svg.call(this.zoom.event); // https://github.com/mbostock/d3/issues/2387
-        //
-        //// Record the coordinates (in data space) of the center (in screen space).
-        //let center0 = this.zoom.center(), translate0 = this.zoom.translate(), coordinates0 = this.coordinates(center0);
-        //this.zoom.scale(this.zoom.scale() * Math.pow(2, + this.getAttribute("data-zoom")));
-        //
-        //// Translate back to the center.
-        //var center1 = this.point(coordinates0);
-        //this.zoom.translate([translate0[0] + center0[0] - center1[0], translate0[1] + center0[1] - center1[1]]);
-        //
-        //this.svg.transition().duration(750).call(this.zoom.event);
+
+        // Record the coordinates (in data space) of the center (in screen space).
+        let center0 = this.zoom.center(), translate0 = this.zoom.translate(), coordinates0 = this.coordinates(center0);
+        this.zoom.scale(this.zoom.scale() * Math.pow(2, + value));
+
+        // Translate back to the center.
+        var center1 = this.point(coordinates0);
+        this.zoom.translate([translate0[0] + center0[0] - center1[0], translate0[1] + center0[1] - center1[1]]);
+
+        this.svg.transition().duration(750).call(this.zoom.event);
     }
 
     private coordinates(point) {

@@ -14,9 +14,16 @@ app {
     flex-direction: column;
 
     .board {
+      display: flex;
       flex: 1;
       order: 1;
-      background: yellow;
+      flex-direction: row;
+
+      #starmap {
+        flex: 1;
+        display: flex;
+        background: yellow;
+      }
 
       .sidebar {
         background: red;

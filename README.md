@@ -1,9 +1,8 @@
 # singularity
 
-MMO RTS browser game
+MMO RTS browser game written in TypeScript
 
 Tech:
-- TypeScript
 - MeteorJS
 - Angular 2
 - MongoDB

@@ -4,6 +4,10 @@ html, body {
   width: 100%;
 }
 
+.nopadding {
+  padding: 0 !important;
+}
+
 app {
   display: flex;
   flex: 1;
@@ -14,12 +18,21 @@ app {
     flex-direction: column;
 
     .board {
+      display: flex;
       flex: 1;
       order: 1;
-      background: yellow;
+      flex-direction: row;
+
+      .dashboard {
+        display: flex;
+
+        #starmap {
+          flex: 1;
+        }
+      }
 
       .sidebar {
-        background: red;
+        background: yellow;
       }
     }
 
@@ -31,5 +44,28 @@ app {
         align-self: flex-end;
       }
     }
+  }
+}
+
+#starmap {
+  svg {
+    font: 10px sans-serif;
+    shape-rendering: crispEdges;
+  }
+
+  rect {
+    fill: #ddd;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #fff;
+  }
+
+  .buttons {
+    position: absolute;
+    right: 30px;
+    top: 30px;
   }
 }

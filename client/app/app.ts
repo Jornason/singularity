@@ -4,7 +4,7 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router'
 import Starmap from "../starmap/starmap";
 
 @Component({
-    selector: "app",
+    selector: "app"
 })
 @View({
     templateUrl: "client/app/app.html",

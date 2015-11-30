@@ -1,10 +1,10 @@
-///<reference path="../../lib/utils/mersenneTwister.ts"/>
-import Planet from "../../lib/models/planet";
-import {PlanetTypes} from "../../lib/models/planetTypes";
-import Vector2 from "../../lib/models/vector2";
-import MersenneTwister from "../../lib/utils/mersenneTwister";
+import Planet from "../models/planet";
+import {PlanetTypes} from "../models/planetTypes";
+import Vector2 from "../models/vector2";
+import MersenneTwister from "../utils/mersenneTwister";
 
-let PI = Math.PI;
+
+const PI = Math.PI;
 
 function rnd() {
     return new MersenneTwister(Date.now());
@@ -15,7 +15,7 @@ export function createSpiralGalaxy(width, height, number, arms, armOffsetMax, ro
     let planets = [];
 
     var numArms = arms || 5;
-    var armSeparationDistance = 2 * this.PI / numArms;
+    var armSeparationDistance = 2 * PI / numArms;
     var armOffsetMax = armOffsetMax || 0.5;
     var rotationFactor = rotationFactor || 5;
     var randomOffsetXY = randomOffsetXY || 0.02;
@@ -23,7 +23,7 @@ export function createSpiralGalaxy(width, height, number, arms, armOffsetMax, ro
     for (var i = 0; i < number; i++) {
 
         var distance = Math.pow(rnd().genrand_real3(), 2);
-        var angle = rnd().genrand_real3() * 2 * this.PI;
+        var angle = rnd().genrand_real3() * 2 * PI;
         var armOffset = rnd().genrand_real3() * armOffsetMax;
         armOffset = armOffset - armOffsetMax / 2;
         armOffset = armOffset * (1 / distance);
@@ -69,8 +69,30 @@ export function createPeculiarGalaxy() {
     //todo
 }
 
-export function createEllipticalGalaxy() {
-    //todo
+export function createEllipticalGalaxy(width, height, number, rotation, distance) {
+    let planets = [];
+
+    for (let i = 0; i <= number; i++) {
+
+        let phi = rnd().genrand_real3(),
+            rho = rnd().genrand_real3();
+
+        let multiplier = distance == 0 ? Math.sqrt(rho) : Math.pow(rnd().genrand_real3(), 2);
+
+        let x = multiplier * Math.cos(phi),
+            y = multiplier * Math.sin(phi);
+
+        planets.push(new Planet({
+            name: "Planet " + i.toString(),
+            type: PlanetTypes.undefined,
+            position: new Vector2({
+                X: x * width / 2.0,
+                Y: y * height / 2.0
+            })
+        }));
+    }
+
+    return planets;
 }
 
 export function createLenticularGalaxy() {

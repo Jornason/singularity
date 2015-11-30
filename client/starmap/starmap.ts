@@ -3,6 +3,7 @@
 import {Component, View, Inject, ElementRef, NgFor} from "angular2/angular2";
 import Config from "../../lib/config";
 import {Planets} from "../../lib/collection/planets";
+import {createEllipticalGalaxy} from "../../lib/install/galaxyGenerator";
 
 @Component({
     selector: "starmap",
@@ -33,7 +34,14 @@ export default class Starmap {
     ) {
         this.self = this;
         this.galaxy = options.galaxy;
-        this.planets = Planets.find();
+        //this.planets = Planets.find();
+        this.planets = createEllipticalGalaxy(
+            800, //width
+            800, //height
+            3000, //number
+            0, //rotation
+            0 //distance
+        );
         this.elem = elementRef.nativeElement;
         this.create();
     }
@@ -109,8 +117,12 @@ export default class Starmap {
             .data(planets)
             .enter()
             .append("circle")
-            .attr("cx", function (c) { return c.cx })
-            .attr("cy", function (c) { return c.cy })
+            .attr("cx", function (c) {
+                return c.cx
+            })
+            .attr("cy", function (c) {
+                return c.cy
+            })
             .attr("r", 2)
             .attr("fill", "red");
     }
@@ -133,8 +145,8 @@ export default class Starmap {
         for (let i = 0; i < this.planets.length; i++) {
             var p = this.planets[i];
             planets.push({
-                cx: p.x,
-                cy: p.y,
+                cx: p.position.X,
+                cy: p.position.Y,
                 r: 2,
                 fill: "red"
             });

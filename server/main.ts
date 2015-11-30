@@ -1,5 +1,5 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
-import {createSpiralGalaxy} from "./install/galaxyGenerator";
+//import {createSpiralGalaxy} from "./../client/starmap/galaxyGenerator";
 
 Meteor.startup(function () {
     console.log("Server started...");

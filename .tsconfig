@@ -1,7 +1,0 @@
-{
-  "diagnostics": true,
-  "alwaysThrow": false,
-  "noResolve": false,
-  "useCache": false,
-  "sourceMap": true
-}

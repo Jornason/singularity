@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <title>singularity</title>
+
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/babylonjs/babylon.max.js"></script>
+    <script src="client/common/arcRotatePanCamera.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                client: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('client/boot').then(null, console.error.bind(console));
+    </script>
+    <style>
+        html, body {
+            overflow: hidden;
+            width   : 100%;
+            height  : 100%;
+            margin  : 0;
+            padding : 0;
+        }
+
+        #renderCanvas {
+            width   : 100%;
+            height  : 100%;
+        }
+    </style>
+</head>
+<body>
+<app>Loading...</app>
+</body>
+</html>

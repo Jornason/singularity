@@ -1,0 +1,21 @@
+{
+  "name": "singularity",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Gabor Pankotay <gpankotay@aiss.hu>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~4.0.0"
+  }
+}
